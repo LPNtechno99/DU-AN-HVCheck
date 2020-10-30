@@ -45,9 +45,10 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="200"/>
                     <RowDefinition Height="200"/>
+                    <RowDefinition Height="150"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <GroupBox Margin="0 5 0 0" Header="Thêm Khách Hàng" FontSize="14" FontWeight="Bold">
+                <GroupBox Margin="0 5 0 0" Header="Thêm Đại Lý" FontSize="14" FontWeight="Bold" IsEnabled="False">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -67,7 +68,7 @@
                         </StackPanel>
                     </Grid>
                 </GroupBox>
-                <GroupBox Grid.Row="1" Margin="0 20 0 0" Header="Cài đặt thông số" FontSize="14" FontWeight="Bold">
+                <GroupBox Grid.Row="1" Margin="0 10 0 0" Header="Cài đặt thông số" FontSize="14" FontWeight="Bold">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -89,6 +90,14 @@
                         </StackPanel>
                     </Grid>
                 </GroupBox>
+                <GroupBox Grid.Row="2" Margin="0 10 0 0" Header="Chọn chế độ chạy" FontSize="16" FontWeight="Bold" >
+                    <StackPanel Orientation="Vertical" Margin="0 10 0 0">
+                        <ComboBox Margin="5 10 5 0" Background="#FFEA9494" Height="35">
+                            <ComboBoxItem Content="Chạy thường" Margin="5 0 0 0"/>
+                            <ComboBoxItem Content="Chạy kiểm tra" Margin="5 0 0 0"/>
+                        </ComboBox>
+                    </StackPanel>
+                </GroupBox>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -99,10 +108,12 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="Tên Đại Lý:" 
                                FontSize="16" FontWeight="Bold" Margin="10 0 0 0"/>
-                        <ComboBox Width="200" Background="#FF669EFF" Margin="10 0 0 0"/>
+                        <ComboBox Width="200" Height="35" Background="#FF5DD1B1" Margin="10 0 0 0"/>
                         <TextBlock Margin="20 0 0 0" Text="Số Lượng Đặt:" FontSize="16" FontWeight="Bold" 
                                VerticalAlignment="Center"/>
-                        <TextBox Margin="10 0 0 0" Width="150" VerticalAlignment="Center" Background="#FFE6CEE0"/>
+                        <TextBox Margin="10 0 0 0" Width="150" VerticalAlignment="Center" Background="#FFE6CEE0" 
+                                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" 
+                                 FontSize="16" FontWeight="Bold" Text="0"/>
                     </StackPanel>
                 </GroupBox>
                 <Border Grid.Row="1" Margin="5" BorderBrush="#FF427EC7" BorderThickness="1">
@@ -111,17 +122,32 @@
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <GroupBox Grid.Row="1" Header="Kết quả" FontSize="12" FontWeight="Bold" Margin="0 0 5 0">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Chuỗi đọc được:" HorizontalAlignment="Left" Margin="5 5 0 0"/>
-                        <TextBlock Background="#FFA5E4E4" Width="160" Height="25" Margin="5 5 0 0" HorizontalAlignment="Left"/>
-                    </StackPanel>
+                <GroupBox Grid.Row="0" Header="Kết quả" FontSize="12" FontWeight="Bold" Margin="0 10 5 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Margin="0 0 0 5">
+                            <Label Background="LightGray" FontSize="36" FontWeight="Bold" Content="NONE" 
+                                   VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                        </Grid>
+                        <StackPanel Grid.Row="1">
+                            <TextBlock Text="Mã đọc được:" HorizontalAlignment="Left" Margin="5 5 0 0"/>
+                            <TextBlock Background="#FFA5E4E4" Width="160" Height="25" Margin="5 5 0 0" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Sản Phẩm PASS:" HorizontalAlignment="Left" Margin="5 5 0 0"/>
+                            <TextBlock Background="#FF96F156" Width="160" Height="25" Margin="5 5 0 0" HorizontalAlignment="Left" 
+                                       TextAlignment="Center" Foreground="White"/>
+                            <TextBlock Text="Sản Phẩm FAIL:" HorizontalAlignment="Left" Margin="5 5 0 0"/>
+                            <TextBlock Background="#FFEAA686" Width="160" Height="25" Margin="5 5 0 0" HorizontalAlignment="Left"
+                                       TextAlignment="Center" Foreground="White"/>
+                        </StackPanel>
+                    </Grid>
                 </GroupBox>
-                <Border Grid.Row="2" Margin="0 5 5 10" BorderBrush="#FF427EC7" BorderThickness="1">
+                <Border Grid.Row="1" Margin="0 5 5 10" BorderBrush="#FF427EC7" BorderThickness="1">
                     <Button Padding="5" Height="100" Margin="10 100 10 10 " FontSize="50" 
                             FontWeight="Bold" Background="#FF46C546" Content="CHẠY"/>
                 </Border>
