@@ -6,12 +6,38 @@
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
         Title="wdChayThuong" Height="720" Width="1280" WindowStyle="None" WindowStartupLocation="CenterScreen" 
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <RoutedUICommand x:Key="MyCommandF1" Text="text"/>
+        <RoutedUICommand x:Key="MyCommandF2" Text="text"/>
+        <RoutedUICommand x:Key="MyCommandF3" Text="text"/>
+
+        <ControlTemplate x:Key="Label_Tiltle" TargetType="Label">
+            <Grid>
+                <Border BorderBrush="Black" BorderThickness="0.6">
+                    <Rectangle Fill="#FF399DF1" Height="30"/>
+                </Border>
+                <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" TextBlock.TextAlignment="Center"
+                                  TextBlock.FontSize="16" TextBlock.FontWeight="Bold" TextBlock.Foreground="White" TextBlock.FontFamily="{TemplateBinding FontFamily}"/>
+            </Grid>
+        </ControlTemplate>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource MyCommandF1}" Executed="EventF1Push_Process"/>
+        <CommandBinding Command="{StaticResource MyCommandF2}" Executed="EventF2Push_Process"/>
+        <CommandBinding Command="{StaticResource MyCommandF3}" Executed="EventF3Push_Process"/>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{StaticResource MyCommandF1}"/>
+        <KeyBinding Key="F2" Command="{StaticResource MyCommandF2}"/>
+        <KeyBinding Key="F3" Command="{StaticResource MyCommandF3}"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition />
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid>
             <Grid>
@@ -77,12 +103,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Trigger Delay:" VerticalAlignment="Center" Margin="5 0 0 0"/>
-                            <TextBox VerticalAlignment="Center" Width="100" Margin="5 0 0 0" Background="#FFC5E6E6"/>
+                            <TextBox VerticalAlignment="Center" Width="100" Margin="5 0 0 0" Background="#FFC5E6E6" TextAlignment="Right"/>
                             <TextBlock Margin="5 0 0 0" Text="ms" VerticalAlignment="Center"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
                             <TextBlock Text="Reject Delay:" VerticalAlignment="Center" Margin="5 0 0 0"/>
-                            <TextBox VerticalAlignment="Center" Width="100" Margin="5 0 0 0" Background="#FFC5E6E6"/>
+                            <TextBox VerticalAlignment="Center" Width="100" Margin="5 0 0 0" Background="#FFC5E6E6" TextAlignment="Right"/>
                             <TextBlock Margin="5 0 0 0" Text="ms" VerticalAlignment="Center"/>
                         </StackPanel>
                         <StackPanel Grid.Row="2">
@@ -92,9 +118,9 @@
                 </GroupBox>
                 <GroupBox Grid.Row="2" Margin="0 10 0 0" Header="Chọn chế độ chạy" FontSize="16" FontWeight="Bold" >
                     <StackPanel Orientation="Vertical" Margin="0 10 0 0">
-                        <ComboBox Margin="5 10 5 0" Background="#FFEA9494" Height="35">
-                            <ComboBoxItem Content="Chạy thường" Margin="5 0 0 0"/>
-                            <ComboBoxItem Content="Chạy kiểm tra" Margin="5 0 0 0"/>
+                        <ComboBox Name="cbbChonCheDoChay" Margin="5 10 5 0" Background="#FFFDFD65" Height="35">
+                            <ComboBoxItem Content="Chạy thường" Margin="10 0 0 0"/>
+                            <ComboBoxItem Content="Chạy kiểm tra" Margin="10 0 0 0"/>
                         </ComboBox>
                     </StackPanel>
                 </GroupBox>
@@ -122,10 +148,15 @@
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="3*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <GroupBox Grid.Row="0" Header="Kết quả" FontSize="12" FontWeight="Bold" Margin="0 10 5 0">
+                <GroupBox Margin="5 0 5 0" Height="100" Header="Chọn công việc" FontSize="12" FontWeight="Bold">
+                    <ComboBox FontSize="12" FontWeight="Bold" VerticalContentAlignment="Center" 
+                              Name="cbbCongViec" Background="#FF76D7E6"/>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Header="Kết quả" FontSize="12" FontWeight="Bold" Margin="0 10 5 0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -147,8 +178,8 @@
                         </StackPanel>
                     </Grid>
                 </GroupBox>
-                <Border Grid.Row="1" Margin="0 5 5 10" BorderBrush="#FF427EC7" BorderThickness="1">
-                    <Button Padding="5" Height="100" Margin="10 100 10 10 " FontSize="50" 
+                <Border Grid.Row="2" Margin="0 5 5 10" BorderBrush="#FF427EC7" BorderThickness="1">
+                    <Button Height="100" Margin="10 10 10 10 " FontSize="50" 
                             FontWeight="Bold" Background="#FF46C546" Content="CHẠY"/>
                 </Border>
             </Grid>
@@ -156,7 +187,16 @@
 
         <Border Grid.Row="2" Margin="2" BorderBrush="#FF427EC7" BorderThickness="1" 
                 Background="{DynamicResource HeaderWindow}">
-            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Template="{StaticResource Label_Tiltle}" Content="F1 - Chế độ chạy thường"/>
+                <Label Grid.Column="1" Template="{StaticResource Label_Tiltle}" Content="F2 - Chế độ chạy Kiểm Tra"/>
+                <Label Grid.Column="2" Template="{StaticResource Label_Tiltle}" Content="F3 - Hiển thị dữ liệu"/>
+            </Grid>
         </Border>
     </Grid>
 </Window>

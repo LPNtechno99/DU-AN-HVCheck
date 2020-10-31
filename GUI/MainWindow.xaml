@@ -5,17 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="180" Width="350" WindowStyle="None" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="170" Width="350" WindowStyle="None" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        
-        
+        <RoutedUICommand x:Key="MyCommandF1" Text="text"/>
+        <RoutedUICommand x:Key="MyCommandF2" Text="text"/>
     </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource MyCommandF1}" Executed="EventF1Push"/>
+        <CommandBinding Command="{StaticResource MyCommandF2}" Executed="EventF2Push"/>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{StaticResource MyCommandF1}"/>
+        <KeyBinding Key="F2" Command="{StaticResource MyCommandF2}"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <StackPanel Background="{StaticResource HeaderBackground}">
             <Button Content="X" Style="{StaticResource ButtonStyle}" 
@@ -41,8 +49,15 @@
                 <ComboBoxItem Content="Chạy Kiểm Tra"/>
             </ComboBox>
         </Grid>
-        <StackPanel Grid.Row="2" Background="{StaticResource HeaderBackground}">
-            
-        </StackPanel>
+        <Grid Grid.Row="2" Background="{StaticResource HeaderBackground}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="F1 - Chế độ chạy thường" FontSize="12" FontWeight="Bold"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Text="F2 - Chế độ chạy kiểm tra" FontSize="12" FontWeight="Bold"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
     </Grid>
 </Window>

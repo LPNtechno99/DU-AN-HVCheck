@@ -64,8 +64,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ReceviedDataFromCamera.cs" />
     <Compile Include="wdChayThuong.xaml.cs">
       <DependentUpon>wdChayThuong.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wdHienThiDuLieu.xaml.cs">
+      <DependentUpon>wdHienThiDuLieu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wdKiemTra.xaml.cs">
+      <DependentUpon>wdKiemTra.xaml</DependentUpon>
     </Compile>
     <Page Include="Dictionary.xaml">
       <SubType>Designer</SubType>
@@ -84,6 +91,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="wdChayThuong.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wdHienThiDuLieu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wdKiemTra.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

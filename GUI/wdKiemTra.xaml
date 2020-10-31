@@ -1,0 +1,65 @@
+﻿<Window x:Class="GUI.wdKiemTra"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI"
+        mc:Ignorable="d"
+        Title="wdKiemTra" Height="550" Width="500" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+    <Window.Resources>
+        
+        <RoutedUICommand x:Key="MyCommandESC" Text="text"/>
+
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource MyCommandESC}" Executed="EventEscPush"/>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="Esc" Command="{StaticResource MyCommandESC}"/>
+    </Window.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="350"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Thông tin kiểm tra" FontSize="18" FontWeight="Bold">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Mã Nhận được" Template="{StaticResource Label_view}" Background="#FF276BA4"
+                       Foreground="White"/>
+                <Label Grid.Row="1" Content="Mã Đại Lý" Template="{StaticResource Label_view}" Background="#FF276BA4"
+                       Foreground="White"/>
+                <Label Grid.Row="2" Content="Tên Đại Lý" Template="{StaticResource Label_view}" Background="#FF276BA4"
+                       Foreground="White"/>
+                <Label Grid.Row="3" Content="Giờ Ngày Xuất" Template="{StaticResource Label_view}" Background="#FF276BA4"
+                       Foreground="White"/>
+                <Label Grid.Row="4" Content="Tính đến hiện tại" Template="{StaticResource Label_view}" Background="#FF276BA4"
+                       Foreground="White"/>
+                <Label Grid.Column="1" Template="{StaticResource Label_view}" Background="#FF3AC55A"
+                       Foreground="White" Content="None"/>
+                <Label Grid.Column="1" Grid.Row="1" Template="{StaticResource Label_view}" Background="#FF3AC55A"
+                       Foreground="White" Content="None"/>
+                <Label Grid.Column="1" Grid.Row="2" Template="{StaticResource Label_view}" Background="#FFF07345"
+                       Foreground="White" Content="None"/>
+                <Label Grid.Column="1" Grid.Row="3" Template="{StaticResource Label_view}" Background="#FFF07345"
+                       Foreground="White" Content="None"/>
+                <Label Grid.Column="1" Grid.Row="4" Template="{StaticResource Label_view}" Background="#FF3AC55A"
+                       Foreground="White" Content="None"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Header="Kết Quả" FontSize="16" FontWeight="Bold">
+            <Label Background="#FFD3D1D1" FontSize="50" FontWeight="Bold" 
+                   Foreground="White" Content="None" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        </GroupBox>
+    </Grid>
+</Window>

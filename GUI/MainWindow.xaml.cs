@@ -36,8 +36,27 @@ namespace GUI
             {
                 wdChayThuong wd = new wdChayThuong();
                 wd.ShowDialog();
-                this.Close();
+               
             }
+            else if(cbbChonCheDo.SelectedIndex == 1)
+            {
+                wdChayThuong wd = new wdChayThuong();
+                wd.ShowDialog();
+            }
+        }
+
+        private void EventF1Push(object sender, ExecutedRoutedEventArgs e)
+        {
+            wdChayThuong wd = new wdChayThuong();
+            wd.ShowDialog();
+            
+        }
+
+        private void EventF2Push(object sender, ExecutedRoutedEventArgs e)
+        {
+            wdChayThuong wd = new wdChayThuong();
+            wd.ShowDialog();
+            
         }
     }
 }

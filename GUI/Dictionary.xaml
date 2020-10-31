@@ -1,6 +1,17 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:GUI">
+
+    <ControlTemplate x:Key="Label_view" TargetType="Label">
+        <Grid>
+            <Border BorderBrush="Black" BorderThickness="0.6">
+                <Rectangle Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"/>
+            </Border>
+            <ContentPresenter Content="{TemplateBinding Content}" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" 
+                                  TextBlock.Foreground="{TemplateBinding Foreground}" TextBlock.TextAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </ControlTemplate>
+
     <Style x:Key="BorderStyle" TargetType="Border">
         <Setter Property="Background" Value="Azure"/>
         <Setter Property="BorderBrush" Value="White"/>
