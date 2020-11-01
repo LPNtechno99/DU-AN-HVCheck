@@ -64,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ColorConverter.cs" />
     <Compile Include="ReceviedDataFromCamera.cs" />
     <Compile Include="wdChayThuong.xaml.cs">
       <DependentUpon>wdChayThuong.xaml</DependentUpon>

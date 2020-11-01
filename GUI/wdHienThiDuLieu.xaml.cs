@@ -23,5 +23,15 @@ namespace GUI
         {
             InitializeComponent();
         }
+
+        private void EventEscPush(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void EventF5Push(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace GUI
     public class ReceviedDataFromCamera
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
+        public void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -24,7 +24,16 @@ namespace GUI
                 OnPropertyChanged("ReceviedString");
             }
         }
-        public enum StatusCheck { PASS, FAIL}
-
+        public enum StatusCheck { NONE, PASS, FAIL}
+        private StatusCheck _resultCheck = 0;
+        public StatusCheck ResultCheck
+        {
+            get { return _resultCheck; }
+            set
+            {
+                _resultCheck = value;
+                OnPropertyChanged("ResultCheck");
+            }
+        }
     }
 }

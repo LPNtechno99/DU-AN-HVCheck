@@ -9,9 +9,14 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Loaded="Window_Loaded">
 
     <Window.Resources>
+        <local:ColorPASSConverter x:Key="ColorPASSConverter"/>
+        <local:ColorFAILConverter x:Key="ColorFAILConverter"/>
+
         <RoutedUICommand x:Key="MyCommandF1" Text="text"/>
         <RoutedUICommand x:Key="MyCommandF2" Text="text"/>
         <RoutedUICommand x:Key="MyCommandF3" Text="text"/>
+        <RoutedUICommand x:Key="MyCommandF9" Text="text"/>
+        <RoutedUICommand x:Key="MyCommandF10" Text="text"/>
 
         <ControlTemplate x:Key="Label_Tiltle" TargetType="Label">
             <Grid>
@@ -27,11 +32,15 @@
         <CommandBinding Command="{StaticResource MyCommandF1}" Executed="EventF1Push_Process"/>
         <CommandBinding Command="{StaticResource MyCommandF2}" Executed="EventF2Push_Process"/>
         <CommandBinding Command="{StaticResource MyCommandF3}" Executed="EventF3Push_Process"/>
+        <CommandBinding Command="{StaticResource MyCommandF9}" Executed="EventF9Push_Process"/>
+        <CommandBinding Command="{StaticResource MyCommandF10}" Executed="EventF10Push_Process"/>
     </Window.CommandBindings>
     <Window.InputBindings>
         <KeyBinding Key="F1" Command="{StaticResource MyCommandF1}"/>
         <KeyBinding Key="F2" Command="{StaticResource MyCommandF2}"/>
         <KeyBinding Key="F3" Command="{StaticResource MyCommandF3}"/>
+        <KeyBinding Key="F9" Command="{StaticResource MyCommandF9}"/>
+        <KeyBinding Key="F10" Command="{StaticResource MyCommandF10}"/>
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -124,6 +133,10 @@
                         </ComboBox>
                     </StackPanel>
                 </GroupBox>
+                <Button Content="Test Pass" HorizontalAlignment="Left" Margin="26,38,0,0" Grid.Row="3" VerticalAlignment="Top" Width="118"
+                        Click="Button_Click" FontSize="20"/>
+                <Button Content="Test Fail" HorizontalAlignment="Left" Margin="149,38,0,0" Grid.Row="3" VerticalAlignment="Top" Width="118"
+                        Click="TestFail_Click" FontSize="20"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -156,15 +169,15 @@
                     <ComboBox FontSize="12" FontWeight="Bold" VerticalContentAlignment="Center" 
                               Name="cbbCongViec" Background="#FF76D7E6"/>
                 </GroupBox>
-                <GroupBox Grid.Row="1" Header="Kết quả" FontSize="12" FontWeight="Bold" Margin="0 10 5 0">
+                <GroupBox Grid.Row="1" Header="Kết quả" FontSize="12" FontWeight="Bold" Margin="0 0 5 0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid Margin="0 0 0 5">
-                            <Label Background="LightGray" FontSize="36" FontWeight="Bold" Content="NONE" 
-                                   VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                            <Label Background="LightGray" FontSize="36" FontWeight="Bold" Content="{Binding ResultCheck, UpdateSourceTrigger=PropertyChanged}" 
+                                   VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Name="lblPassFail"/>
                         </Grid>
                         <StackPanel Grid.Row="1">
                             <TextBlock Text="Mã đọc được:" HorizontalAlignment="Left" Margin="5 5 0 0"/>
@@ -192,10 +205,14 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Label Template="{StaticResource Label_Tiltle}" Content="F1 - Chế độ chạy thường"/>
                 <Label Grid.Column="1" Template="{StaticResource Label_Tiltle}" Content="F2 - Chế độ chạy Kiểm Tra"/>
                 <Label Grid.Column="2" Template="{StaticResource Label_Tiltle}" Content="F3 - Hiển thị dữ liệu"/>
+                <Label Grid.Column="3" Template="{StaticResource Label_Tiltle}" Content="F9 - Chạy"/>
+                <Label Grid.Column="4" Template="{StaticResource Label_Tiltle}" Content="F10 - Dừng"/>
             </Grid>
         </Border>
     </Grid>

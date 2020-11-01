@@ -5,16 +5,82 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-        Title="wdHienThiDuLieu" Height="650" Width="800" WindowStartupLocation="CenterScreen">
+        Title="wdHienThiDuLieu" Height="650" Width="900" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="DGHeaderStyle" TargetType="{x:Type DataGrid}">
+            <Setter Property="ColumnHeaderStyle" Value="{DynamicResource DGCHeaderStyle}"/>
+        </Style>
+        <Style x:Key="DGCHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="YellowGreen"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+        </Style>
+
+        <RoutedUICommand x:Key="MyCommandEsc" Text="text"/>
+        <RoutedUICommand x:Key="MyCommandF5" Text="text"/>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource MyCommandEsc}" Executed="EventEscPush"/>
+        <CommandBinding Command="{StaticResource MyCommandF5}" Executed="EventF5Push"/>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="Esc" Command="{StaticResource MyCommandEsc}"/>
+        <KeyBinding Key="F5" Command="{StaticResource MyCommandF5}"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
             <RowDefinition Height="3*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <GroupBox Header="Truy xuất dữ liệu" FontSize="14" FontWeight="Bold">
             <Grid>
-                
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+
+                </Grid.ColumnDefinitions>
+                <Label Template="{StaticResource Label_view}" Content="Truy xuất theo ngày tháng" Background="#FF2EC990" Foreground="White"/>
+                <Label Grid.Row="1" Template="{StaticResource Label_view}" Content="Truy xuất theo khách hàng" Background="#FF2EC990" Foreground="White"/>
+
+                <DatePicker  Margin="5 0 5 0" Height="35" Grid.Column="1" Background="#FFFFE794"/>
+                <ComboBox Grid.Column="1" Grid.Row="1" FontSize="12" FontWeight="Bold" Background="#FFFFE794"
+                          Height="35" VerticalAlignment="Center" Margin="5 0 5 0"/>
             </Grid>
         </GroupBox>
+        <Border Grid.Row="1">
+            <DataGrid Grid.Row="2" Name="dataGrid3" AutoGenerateColumns="True"
+                  RowHeaderWidth="10" GridLinesVisibility="Horizontal"
+                  ColumnWidth="*" SelectionUnit="Cell" SelectionMode="Extended" CanUserResizeColumns="False"
+                  CanUserResizeRows="False" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="10">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="#FFA4EAA4"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" Value="Green"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+        </Border>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Template="{StaticResource Label_view}" Content="Bấm Esc để thoát" Foreground="White" 
+                   Background="#FF2C47A4"/>
+            <Label Grid.Column="1" Template="{StaticResource Label_view}" Content="F5 - Tải lại dữ liệu" Foreground="White" 
+                   Background="#FF2C47A4"/>
+        </Grid>
     </Grid>
 </Window>

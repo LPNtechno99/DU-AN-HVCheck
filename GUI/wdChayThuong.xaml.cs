@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,9 +22,13 @@ namespace GUI
     public partial class wdChayThuong : Window
     {
         private string job_path = @"C:\Microscan\Vscape\Jobs\";
+        public ReceviedDataFromCamera _camera = new ReceviedDataFromCamera();
+        public ObservableCollection<ReceviedDataFromCamera> _objObser = new ObservableCollection<ReceviedDataFromCamera>();
         public wdChayThuong()
         {
             InitializeComponent();
+            _objObser.Add(_camera);
+            this.lblPassFail.DataContext = _objObser;
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
@@ -53,6 +58,15 @@ namespace GUI
             wdHienThiDuLieu wd = new wdHienThiDuLieu();
             wd.ShowDialog();
         }
+        private void EventF9Push_Process(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void EventF10Push_Process(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
         private void getFileNames()
         {
             DirectoryInfo di = new DirectoryInfo(job_path);
@@ -73,5 +87,17 @@ namespace GUI
         {
             getFileNames();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _objObser[0].ResultCheck = ReceviedDataFromCamera.StatusCheck.PASS;
+        }
+
+        private void TestFail_Click(object sender, RoutedEventArgs e)
+        {
+            _objObser[0].ResultCheck = ReceviedDataFromCamera.StatusCheck.FAIL;
+        }
+
+        
     }
 }

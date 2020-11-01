@@ -19,8 +19,9 @@
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="350"/>
+            <RowDefinition Height="300"/>
             <RowDefinition/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <GroupBox Header="Thông tin kiểm tra" FontSize="18" FontWeight="Bold">
             <Grid>
@@ -61,5 +62,7 @@
             <Label Background="#FFD3D1D1" FontSize="50" FontWeight="Bold" 
                    Foreground="White" Content="None" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         </GroupBox>
+        <Label Grid.Row="2" Template="{StaticResource Label_view}" Background="#FF25397A"
+               Content="Bấm Esc để thoát" Foreground="White" />
     </Grid>
 </Window>
