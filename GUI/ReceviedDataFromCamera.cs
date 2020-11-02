@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace GUI
 {
-    public class ReceviedDataFromCamera
+    public class ReceviedDataFromCamera : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        private string _receviedString;
+        private string _receviedString = "None";
         public string ReceviedString
         {
             get { return _receviedString; }
@@ -33,6 +33,26 @@ namespace GUI
             {
                 _resultCheck = value;
                 OnPropertyChanged("ResultCheck");
+            }
+        }
+        private int _counterPass = 0;
+        public int CounterPass
+        {
+            get { return _counterPass; }
+            set
+            {
+                _counterPass = value;
+                OnPropertyChanged("CounterPass");
+            }
+        }
+        private int _counterFail = 0;
+        public int CounterFail
+        {
+            get { return _counterFail; }
+            set
+            {
+                _counterFail = value;
+                OnPropertyChanged("CounterFail");
             }
         }
     }

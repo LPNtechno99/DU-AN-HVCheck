@@ -9,8 +9,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Loaded="Window_Loaded">
 
     <Window.Resources>
-        <local:ColorPASSConverter x:Key="ColorPASSConverter"/>
-        <local:ColorFAILConverter x:Key="ColorFAILConverter"/>
+        <local:ColorConverter x:Key="ColorConverter"/>
 
         <RoutedUICommand x:Key="MyCommandF1" Text="text"/>
         <RoutedUICommand x:Key="MyCommandF2" Text="text"/>
@@ -176,18 +175,20 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid Margin="0 0 0 5">
-                            <Label Background="LightGray" FontSize="36" FontWeight="Bold" Content="{Binding ResultCheck, UpdateSourceTrigger=PropertyChanged}" 
-                                   VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Name="lblPassFail"/>
+                            <Label Background="{Binding ResultCheck, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ColorConverter}}" FontSize="36" FontWeight="Bold" Content="{Binding ResultCheck, UpdateSourceTrigger=PropertyChanged}" 
+                                   VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Name="lblPassFail" Foreground="White"/>
                         </Grid>
                         <StackPanel Grid.Row="1">
                             <TextBlock Text="Mã đọc được:" HorizontalAlignment="Left" Margin="5 5 0 0"/>
-                            <TextBlock Background="#FFA5E4E4" Width="160" Height="25" Margin="5 5 0 0" HorizontalAlignment="Left"/>
+                            <Label Background="#FF419345" Width="160" Height="35" Margin="0 5 0 0" Template="{StaticResource Label_view}" Foreground="White"
+                                   Name="lblChuoiNhan" Content="{Binding ReceviedString, UpdateSourceTrigger=PropertyChanged}" FontSize="14" FontWeight="Bold"/>
                             <TextBlock Text="Sản Phẩm PASS:" HorizontalAlignment="Left" Margin="5 5 0 0"/>
-                            <TextBlock Background="#FF96F156" Width="160" Height="25" Margin="5 5 0 0" HorizontalAlignment="Left" 
-                                       TextAlignment="Center" Foreground="White"/>
+                            <Label Background="#FF96F156" Width="160" Height="25" Margin="0 5 0 0" Template="{StaticResource Label_view}"
+                                   Foreground="Black" Content="{Binding CounterPass, UpdateSourceTrigger=PropertyChanged}" Name="lblCounterPass"/>
                             <TextBlock Text="Sản Phẩm FAIL:" HorizontalAlignment="Left" Margin="5 5 0 0"/>
-                            <TextBlock Background="#FFEAA686" Width="160" Height="25" Margin="5 5 0 0" HorizontalAlignment="Left"
-                                       TextAlignment="Center" Foreground="White"/>
+                            <Label Background="#FFEAA686" Width="160" Height="25" Margin="0 5 0 0"
+                                   Foreground="Black" Template="{StaticResource Label_view}" Name="lblCounterFail"
+                                   Content="{Binding CounterFail, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Grid>
                 </GroupBox>

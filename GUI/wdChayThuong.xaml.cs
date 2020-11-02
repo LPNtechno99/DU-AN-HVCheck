@@ -22,13 +22,19 @@ namespace GUI
     public partial class wdChayThuong : Window
     {
         private string job_path = @"C:\Microscan\Vscape\Jobs\";
-        public ReceviedDataFromCamera _camera = new ReceviedDataFromCamera();
-        public ObservableCollection<ReceviedDataFromCamera> _objObser = new ObservableCollection<ReceviedDataFromCamera>();
+        public ReceviedDataFromCamera _camera;
+        public ObservableCollection<ReceviedDataFromCamera> _objObser;
         public wdChayThuong()
         {
             InitializeComponent();
+
+            _camera = new ReceviedDataFromCamera();
+            _objObser = new ObservableCollection<ReceviedDataFromCamera>();
             _objObser.Add(_camera);
             this.lblPassFail.DataContext = _objObser;
+            this.lblChuoiNhan.DataContext = _objObser;
+            this.lblCounterPass.DataContext = _objObser;
+            this.lblCounterFail.DataContext = _objObser;
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
@@ -90,12 +96,16 @@ namespace GUI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            _objObser[0].ResultCheck = ReceviedDataFromCamera.StatusCheck.PASS;
+            _camera.ResultCheck = ReceviedDataFromCamera.StatusCheck.PASS;
+            _camera.ReceviedString = "Namdepzai";
+            _camera.CounterPass++;
         }
 
         private void TestFail_Click(object sender, RoutedEventArgs e)
         {
-            _objObser[0].ResultCheck = ReceviedDataFromCamera.StatusCheck.FAIL;
+            _camera.ResultCheck = ReceviedDataFromCamera.StatusCheck.FAIL;
+            _camera.ReceviedString = "RineXinhgai";
+            _camera.CounterFail++;
         }
 
         

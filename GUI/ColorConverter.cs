@@ -9,35 +9,18 @@ using System.Windows.Media;
 
 namespace GUI
 {
-    public class ColorPASSConverter : IValueConverter
+    public class ColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is ReceviedDataFromCamera.StatusCheck)
             {
-                if ((ReceviedDataFromCamera.StatusCheck)value == ReceviedDataFromCamera.StatusCheck.PASS)
+                switch((ReceviedDataFromCamera.StatusCheck)value)
                 {
-                    return new SolidColorBrush(Color.FromRgb(70, 197, 70));
-                }
-            }
-            return new SolidColorBrush(Color.FromRgb(211, 211, 211));
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class ColorFAILConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is ReceviedDataFromCamera.StatusCheck)
-            {
-                if ((ReceviedDataFromCamera.StatusCheck)value == ReceviedDataFromCamera.StatusCheck.FAIL)
-                {
-                    return new SolidColorBrush(Color.FromRgb(230, 106, 93));
+                    case ReceviedDataFromCamera.StatusCheck.PASS:
+                        return new SolidColorBrush(Color.FromRgb(70, 197, 70));
+                    case ReceviedDataFromCamera.StatusCheck.FAIL:
+                        return new SolidColorBrush(Color.FromRgb(232, 76, 60));
                 }
             }
             return new SolidColorBrush(Color.FromRgb(211, 211, 211));

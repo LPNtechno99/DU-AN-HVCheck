@@ -50,7 +50,7 @@
                        Foreground="White" Content="None"/>
                 <Label Grid.Column="1" Grid.Row="1" Template="{StaticResource Label_view}" Background="#FF3AC55A"
                        Foreground="White" Content="None"/>
-                <Label Grid.Column="1" Grid.Row="2" Template="{StaticResource Label_view}" Background="#FFF07345"
+                <Label Grid.Column="1" Grid.Row="2" Template="{StaticResource Label_view}" Background="#FFE84C3C"
                        Foreground="White" Content="None"/>
                 <Label Grid.Column="1" Grid.Row="3" Template="{StaticResource Label_view}" Background="#FFF07345"
                        Foreground="White" Content="None"/>
