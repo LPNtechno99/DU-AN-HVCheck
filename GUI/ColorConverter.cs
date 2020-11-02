@@ -23,6 +23,16 @@ namespace GUI
                         return new SolidColorBrush(Color.FromRgb(232, 76, 60));
                 }
             }
+            else if(value is ReceviedDataFromCamera.StateCam)
+            {
+                switch ((ReceviedDataFromCamera.StateCam)value)
+                {
+                    case ReceviedDataFromCamera.StateCam.RUN:
+                        return new SolidColorBrush(Color.FromRgb(70, 197, 70));
+                    case ReceviedDataFromCamera.StateCam.STOP:
+                        return new SolidColorBrush(Color.FromRgb(232, 76, 60));
+                }
+            }
             return new SolidColorBrush(Color.FromRgb(211, 211, 211));
         }
 

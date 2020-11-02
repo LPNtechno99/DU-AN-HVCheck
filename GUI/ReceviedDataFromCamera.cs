@@ -55,5 +55,18 @@ namespace GUI
                 OnPropertyChanged("CounterFail");
             }
         }
+
+        public enum StateCam { RUN, STOP}
+        private StateCam _stateCamera = StateCam.RUN;
+        public StateCam StateCamera
+        {
+            get { return _stateCamera; }
+            set
+            {
+                _stateCamera = value;
+                OnPropertyChanged("StateCamera");
+            }
+        }
+
     }
 }

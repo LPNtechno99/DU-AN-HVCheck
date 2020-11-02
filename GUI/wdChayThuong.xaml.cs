@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Visionscape.Extension;
+using TT_ClientSocketLibrary;
 
 namespace GUI
 {
@@ -22,11 +24,19 @@ namespace GUI
     public partial class wdChayThuong : Window
     {
         private string job_path = @"C:\Microscan\Vscape\Jobs\";
+        private string VisionDevice = "";
+
         public ReceviedDataFromCamera _camera;
         public ObservableCollection<ReceviedDataFromCamera> _objObser;
+        private Connection _cameraMV40;
+        private ClientSocket MicroscanLink;
+
         public wdChayThuong()
         {
             InitializeComponent();
+
+            MicroscanLink = new ClientSocket();
+           
 
             _camera = new ReceviedDataFromCamera();
             _objObser = new ObservableCollection<ReceviedDataFromCamera>();
@@ -35,6 +45,7 @@ namespace GUI
             this.lblChuoiNhan.DataContext = _objObser;
             this.lblCounterPass.DataContext = _objObser;
             this.lblCounterFail.DataContext = _objObser;
+            this.btnChay.DataContext = _objObser;
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
@@ -92,6 +103,97 @@ namespace GUI
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             getFileNames();
+            _cameraMV40 = new Connection();
+            _cameraMV40.ConnectionEventCallback += _cameraMV40_ConnectionEventCallback;
+        }
+
+        private void _cameraMV40_ConnectionEventCallback(Enum_ConnectionEvent e, object obj)
+        {
+            switch (e)
+            {
+                case Enum_ConnectionEvent.DISCOVERED_NEW_CAMERA:
+                    Application.Current.Dispatcher.Invoke(new
+                         Action(() =>
+                         {
+                             Visionscape.Devices.VsDeviceClass dev = obj as Visionscape.Devices.VsDeviceClass;
+                             if (dev.Name != null)
+                             {
+                                 VisionDevice = dev.Name;
+                             }
+
+                         }));
+                    
+                    break;
+                case Enum_ConnectionEvent.DISCOVERED_CAMERA:
+                    _cameraMV40.ConnectJob(job_path + cbbCongViec.Text);
+                    break;
+                case Enum_ConnectionEvent.CONNECTED_JOB:
+                    _cameraMV40.DownloadJob();
+                    break;
+                case Enum_ConnectionEvent.DOWNLOADING_JOB:
+                    break;
+                case Enum_ConnectionEvent.DOWNLOADED_JOB:
+                    _cameraMV40.ConnectIO();
+                    _cameraMV40.ConnectReport();
+                    break;
+                case Enum_ConnectionEvent.CONNECTED_REPORT:
+                    break;
+                case Enum_ConnectionEvent.RECEIVED_REPORT:
+                    break;
+                case Enum_ConnectionEvent.RECEIVED_IMAGE:
+                    Visionscape.Communications.InspectionReport report = obj as Visionscape.Communications.InspectionReport;
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        //Update Image
+                        imgBuffer.DataContext = report.Images[0];
+
+                        //Update Tool Data
+                        foreach (Visionscape.Communications.InspectionReportValue result in report.Results)
+                        {
+                            try
+                            {
+                                if (result.NameSym == "Snapshot1.HiLevelTool1.OCRX1.OutStr")
+                                {
+                                    _camera.ReceviedString = result.AsString;
+                                }
+
+                            }
+                            catch
+                            {
+
+                            }
+                            if(report.InspectionStats.Passed)
+                            {
+                                _camera.CounterPass++;
+                            }
+                            else
+                            {
+                                _camera.CounterFail++;
+                            }
+                        }
+                    }));
+                    break;
+                case Enum_ConnectionEvent.CONNECTED_IO:
+                    break;
+                case Enum_ConnectionEvent.TRIGGERED_IO:
+                    break;
+                case Enum_ConnectionEvent.STATECHANGED_IO:
+                    break;
+                case Enum_ConnectionEvent.DISCONNECTED_DEVICE:
+                    break;
+                case Enum_ConnectionEvent.DISCONNECTED_JOB:
+                    break;
+                case Enum_ConnectionEvent.DISCONNECTED_REPORT:
+                    break;
+                case Enum_ConnectionEvent.DISCONNECTED_IO:
+                    break;
+                case Enum_ConnectionEvent.DISCONNECTED_ALL:
+                    break;
+                case Enum_ConnectionEvent.ERROR:
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -108,6 +210,21 @@ namespace GUI
             _camera.CounterFail++;
         }
 
-        
+        bool _flagInspection;
+        private void btnChay_Click(object sender, RoutedEventArgs e)
+        {
+            if (!_flagInspection)
+            {
+                _cameraMV40.ConnectCamera(VisionDevice);
+                _camera.StateCamera = ReceviedDataFromCamera.StateCam.STOP;
+                _flagInspection = true;
+            }
+            else
+            {
+                _cameraMV40.DisconnectAll();
+                _camera.StateCamera = ReceviedDataFromCamera.StateCam.RUN;
+                _flagInspection = false;
+            }
+        }
     }
 }

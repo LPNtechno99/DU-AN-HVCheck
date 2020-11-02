@@ -54,6 +54,29 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="UIAutomationProvider" />
+    <Reference Include="Visionscape, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>C:\Microscan\Vscape\910_3027\Assembly\Visionscape.dll</HintPath>
+    </Reference>
+    <Reference Include="Visionscape.Communications, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Microscan\Vscape\910_3027\Assembly\Visionscape.Communications.dll</HintPath>
+    </Reference>
+    <Reference Include="Visionscape.Devices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Microscan\Vscape\910_3027\Assembly\Visionscape.Devices.dll</HintPath>
+    </Reference>
+    <Reference Include="Visionscape.Display.Image">
+      <HintPath>C:\Microscan\Vscape\910_3027\Assembly\Display\Visionscape.Display.Image.dll</HintPath>
+    </Reference>
+    <Reference Include="Visionscape.Display.Setup">
+      <HintPath>C:\Microscan\Vscape\910_3027\Assembly\Display\Visionscape.Display.Setup.dll</HintPath>
+    </Reference>
+    <Reference Include="Visionscape.Steps, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Microscan\Vscape\910_3027\Assembly\Visionscape.Steps.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -64,7 +87,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClientSocket.cs" />
     <Compile Include="ColorConverter.cs" />
+    <Compile Include="Connection.cs" />
     <Compile Include="ReceviedDataFromCamera.cs" />
     <Compile Include="wdChayThuong.xaml.cs">
       <DependentUpon>wdChayThuong.xaml</DependentUpon>

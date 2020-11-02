@@ -155,7 +155,8 @@
                     </StackPanel>
                 </GroupBox>
                 <Border Grid.Row="1" Margin="5" BorderBrush="#FF427EC7" BorderThickness="1">
-                    <Image Name="imgBuffer" Margin="5" Source="{Binding}"/>
+                    <Image Name="imgBuffer" Margin="5" />
+                    
                 </Border>
             </Grid>
             <Grid Grid.Column="2">
@@ -193,8 +194,8 @@
                     </Grid>
                 </GroupBox>
                 <Border Grid.Row="2" Margin="0 5 5 10" BorderBrush="#FF427EC7" BorderThickness="1">
-                    <Button Height="100" Margin="10 10 10 10 " FontSize="50" 
-                            FontWeight="Bold" Background="#FF46C546" Content="CHẠY"/>
+                    <Button Height="100" Margin="10 10 10 10 " FontSize="50" Name="btnChay" Click="btnChay_Click"
+                            FontWeight="Bold" Background="{Binding StateCamera, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ColorConverter}}" Content="CHẠY"/>
                 </Border>
             </Grid>
         </Grid>
